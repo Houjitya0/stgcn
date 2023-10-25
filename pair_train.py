@@ -1,0 +1,106 @@
+import torch
+import os
+import numpy as np
+import datetime
+import time
+
+from utils.stgcn import ST_GCN
+from utils.Feeder import Pair_Test_Dataset, Pair_Train_Dataset
+
+
+def pair_train(NUM_PAIR, NUM_CLASSES, NUM_EPOCH, BATCH_SIZE, graph_type, in_channels, t_kernel_size, node_num, E, has_bn,input_file_name, output_file_name):
+  
+  start_time = time.time()
+  
+  # Pytorch
+  seed=123
+  torch.manual_seed(seed)
+  torch.cuda.manual_seed(seed)
+  torch.backends.cudnn.deterministic = True
+  torch.use_deterministic_algorithms = True
+  device = torch.device(0)
+  
+  os.makedirs(f'pth_file/{output_file_name}', exist_ok=True)
+
+  # **************************深層学習**********************************************************
+  for one_pair in range(1, NUM_PAIR+1):
+      data_loader = dict()
+      data_loader['train'] = torch.utils.data.DataLoader(dataset=Pair_Train_Dataset(data_path=f'my_data/{input_file_name}/data.npy', label_path=f'my_data/{input_file_name}/label.npy', pair_num=one_pair), batch_size=BATCH_SIZE, shuffle=True)
+      data_loader['test'] = torch.utils.data.DataLoader(dataset=Pair_Test_Dataset(data_path=f'my_data/{input_file_name}/data.npy', label_path=f'my_data/{input_file_name}/label.npy', pair_num=one_pair), batch_size=BATCH_SIZE, shuffle=False)
+      
+      print('one_pair', one_pair)
+      train_loss_list = []
+      train_acc_list = []
+      val_loss_list = []
+      val_acc_list = []
+      
+      # 組ループの途中で止まってしまった場合の処理
+      if(os.path.exists(f'pth_file/{output_file_name}/model_weight{one_pair}')) and (os.path.exists(f'results/{output_file_name}/{one_pair}')):
+          print(one_pair, 'yes')
+          continue    
+      
+      model = ST_GCN(graph_type=graph_type, NUM_CLASSES=NUM_CLASSES, in_channels=in_channels, t_kernel_size=t_kernel_size, node_num=node_num, E=E, has_bn=has_bn).cuda()
+      
+      optimizer = torch.optim.SGD(model.parameters(), lr=0.01, momentum=0.9)
+      criterion = torch.nn.CrossEntropyLoss()
+
+      # 学習
+      print('\nStart training')
+      for epoch in range(NUM_EPOCH):
+          train_loss = 0
+          train_acc = 0
+          val_loss = 0
+          val_acc = 0
+          
+          #train
+          model.train()
+          for i, (data, label) in enumerate(data_loader['train']):
+                        
+              data = data.to(device)
+              label = label.to(device)      
+              
+              optimizer.zero_grad()
+              output = model(data)
+              loss = criterion(output, label)
+              train_loss += loss.item()
+              train_acc += (output.max(1)[1] == label).sum().item()
+              loss.backward()
+              optimizer.step()
+          
+          avg_train_loss = train_loss / len(data_loader['train'].dataset)
+          avg_train_acc = train_acc / len(data_loader['train'].dataset)
+          
+          #val
+          model.eval()
+          with torch.no_grad():
+              for data, label in data_loader['test']:
+                  data = data.to(device)
+                  label = label.to(device)
+                  output = model(data)
+                  loss = criterion(output, label)
+                  val_loss += loss.item()
+                  val_acc += (output.max(1)[1] == label).sum().item()
+          avg_val_loss = val_loss / len(data_loader['test'].dataset)
+          avg_val_acc = val_acc / len(data_loader['test'].dataset)
+          
+          print ('Epoch [{}/{}], Loss: {loss:.4f}, val_loss: {val_loss:.4f}, val_acc: {val_acc:.4f}' 
+                      .format(epoch+1, NUM_EPOCH, i+1, loss=avg_train_loss, val_loss=avg_val_loss, val_acc=avg_val_acc))
+          train_loss_list.append(avg_train_loss)
+          train_acc_list.append(avg_train_acc)
+          val_loss_list.append(avg_val_loss)
+          val_acc_list.append(avg_val_acc)
+
+
+      # 1pairごとに学習記録を保存
+      print(output_file_name)
+      os.makedirs(f'results/{output_file_name}/{one_pair}', exist_ok=True)
+            
+      np.save(f'results/{output_file_name}/{one_pair}/train_loss_list', train_loss_list)
+      np.save(f'results/{output_file_name}/{one_pair}/train_acc_list', train_acc_list)
+      np.save(f'results/{output_file_name}/{one_pair}/val_loss_list', val_loss_list)
+      np.save(f'results/{output_file_name}/{one_pair}/val_acc_list', val_acc_list)
+      torch.save(model, f'pth_file/{output_file_name}/model_weight{one_pair}')
+      del model
+      
+      
+  print('learn_time', datetime.timedelta(time.time() - start_time))
