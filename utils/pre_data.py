@@ -66,7 +66,7 @@ def scale_data(data, height, ratio, distance):
     data = data * scale_factor
     return data
 
-def scale_data_fixed(data, height, fixed_size, distance):
+def scale_data_fixed(data, fixed_size, distance):
     if (distance == 0):
         distance = distance + 0.001
     data = data * (fixed_size / distance)       
@@ -123,7 +123,7 @@ def skeleton_normarization(data, ratio, left_sholder, right_sholder, left_hip, r
     return data
 
 
-def skeleton_normarization_fixed(data, fixed_size, left_sholder, right_sholder, left_hip, right_hip, width=255, height=255):
+def skeleton_normarization_fixed(data, fixed_size, left_sholder, right_sholder, left_hip, right_hip, is_center, width=255, height=255):
     """
     骨格データを正規化する
     
@@ -163,21 +163,23 @@ def skeleton_normarization_fixed(data, fixed_size, left_sholder, right_sholder, 
     distance = calculate_distance(m1, m2)    
     
     # 距離を一定にする
-    data = scale_data(data, height, fixed_size, distance)
+    data = scale_data_fixed(data, fixed_size, distance)
 
     # もとの位置に戻る
-    # data = translate_data(data, -center)
-    
-    return data
+    if (is_center):
+        return data
+    else:
+        data = translate_data(data, -center)
+        return data
 
 
-def t_skeleton_normarization_fixed_size(data, fixed_size, left_shoulder=5, right_shoulder=6, left_hip=11, right_hip=12, hasMidpoint=False, width=255, height=255):
+def t_skeleton_normarization_fixed_size(data, fixed_size, is_center=True, left_shoulder=5, right_shoulder=6, left_hip=11, right_hip=12, hasMidpoint=False, width=255, height=255):
     T, V, C = data.shape
     midpoints = np.empty((T, 2, C))
     normarized_data = np.empty((T, V, C))
 
     for i in range(len(data)):
-        normarized_data[i] = skeleton_normarization_fixed(data[i], fixed_size, left_shoulder, right_shoulder, left_hip, right_hip, width, height)
+        normarized_data[i] = skeleton_normarization_fixed(data[i], fixed_size, left_shoulder, right_shoulder, left_hip, right_hip, is_center, width, height)
     
     if (hasMidpoint):
         mid_normarized_data = np.empty((T, V+2, C))

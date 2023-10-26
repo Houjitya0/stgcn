@@ -25,6 +25,8 @@
 
 
   "graph_type" : "base",
+  "is_center" : true,
+  "normarize_scale" : 150,
   "in_channels" : 2,
   "t_kernel_size" : 9,
   "has_bn" : false

@@ -80,7 +80,7 @@ for try_count in range(1, try_num+1):
                 # 人物をフレームの中心に持ってくる
                 keypoints[i, j] = to_center(keypoints[i, j], shoulder_and_hip, 255, 255) 
                 # 時間
-                keypoints[i, j] = t_skeleton_normarization(keypoints[i, j], ratio=0.2)
+                keypoints[i, j] = t_skeleton_normarization_fixed_size(data=keypoints[i, j], fixed_size=50, is_center=meta["is_center"])
                 
             # 左の人からはleft_node_indexにはいっているノードだけ取り出す
             # 例 left_node_index=[0, 1, 2, 15] 鼻,左目,右目,左足首
@@ -92,6 +92,7 @@ for try_count in range(1, try_num+1):
 
             data[i*min_move_num:(i+1)*min_move_num] = setup_data(tmp,labels[i], out_frame_num, interval_num, min_move_num)        
                 
+        data = data / meta["normarize_scale"]
         print(data.shape)
         
         # 正解ラベル作成
