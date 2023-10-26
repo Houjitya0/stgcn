@@ -12,7 +12,6 @@ from utils.pre_data import setup_data, to_center, t_skeleton_normarization_fixed
 from pair_train import pair_train
 from vote import pair_vote
 
-##git用
 
 parser = argparse.ArgumentParser(description='Description of your program')
 parser.add_argument('config_file_name', type=str, help='config_file_name')
