@@ -5,7 +5,6 @@ from utils.pre_data import to_center, t_skeleton_normarization_fixed_size, setup
 
 def create_two_person_data(meta, try_count, input_file_name):
     # 学習パラメータ
-    BATCH_SIZE = meta["BATCH_SIZE"]
     NUM_CLASSES = meta["NUM_CLASSES"]
 
     # 短動画パラメータ

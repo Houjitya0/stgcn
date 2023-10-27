@@ -9,8 +9,8 @@ import time
 import datetime
 import argparse
 
-from pair_train import pair_train
-from vote import pair_vote
+from pair_train import pair_train, walk_path_train
+from vote import pair_vote, walk_path_vote
 from create_data import create_two_person_data
 
 
@@ -81,10 +81,18 @@ for try_count in range(1, try_num + 1):
     has_bn = meta["has_bn"]
 
     # ******************************************* train ****************************************************************************************************
-    pair_train(meta, try_count, f"{input_file_name}", f"{output_file_name}")
+    if (meta["train_type"] == "pair"):
+        pair_train(meta, try_count, f"{input_file_name}", f"{output_file_name}")
+    elif (meta["train_type"] == "walk_path"):
+        walk_path_train(meta, try_count, input_file_name, output_file_name)
+
 
 # *************************************************vote****************************************************************************************
-pair_vote(meta, input_file_name, output_file_name)
+if (meta["train_type"] == "pair"):
+    pair_vote(meta, input_file_name, output_file_name)
+elif (meta["train_type"] == "walk_path"):
+    walk_path_vote(meta, input_file_name, output_file_name)
+
 
 
 # ++++++++++++++++++++++++++++++++++++++++++++++++ img_result++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
