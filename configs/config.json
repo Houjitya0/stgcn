@@ -3,7 +3,7 @@
 
   "train_type" : "walk_path",
   "train_walk_num" : 0,
-  "test_walk_num" : 0,
+  "test_walk_num" : 2,
 
   "try_num": 3,
   "BATCH_SIZE" : 32,

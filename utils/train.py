@@ -9,6 +9,7 @@ from utils.Feeder import Pair_Test_Dataset, Pair_Train_Dataset, Pair_Walk_Path_T
 
 def pair_train(meta, try_count, input_file_name, output_file_name):
   
+    print(f"試行回数 : {try_count}目")
     start_time = time.time()
     
     NUM_PAIR = meta["NUM_PAIR"]

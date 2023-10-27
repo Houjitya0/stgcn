@@ -1,9 +1,14 @@
 import numpy as np
 import os
+import time
+import datetime
 from utils.pre_data import to_center, t_skeleton_normarization_fixed_size, setup_data
 
-
 def create_two_person_data(meta, try_count, input_file_name):
+    
+    print("create date_file")
+    start = time.time()
+        
     # 学習パラメータ
     NUM_CLASSES = meta["NUM_CLASSES"]
 
@@ -58,3 +63,7 @@ def create_two_person_data(meta, try_count, input_file_name):
 
     else:
         print("data_file is existed")
+        
+        
+    data_creation_time = time.time()
+    print("data_creation_time : ", datetime.timedelta(seconds=data_creation_time - start))

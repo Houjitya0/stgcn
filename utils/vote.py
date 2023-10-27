@@ -63,7 +63,7 @@ def pair_vote(meta, input_file_name, output_file_name):
             if most_common_value == (i % 3):
                 correct += 1
                     
-        vote_acc =  100. * correct / (624*graph_per_video)
+        vote_acc =  100. * correct / (VIDEO_NUM*graph_per_video)
 
         np.save(f"results/{output_file_name}/{try_count}/conf_mat", confusion_matrix)
         np.save(f"results/{output_file_name}/{try_count}/vote_acc", vote_acc)
@@ -112,7 +112,6 @@ def walk_path_vote(meta, input_file_name, output_file_name):
                 predict = predict.to('cpu').detach().numpy().copy()
                 predicts += predict.tolist() 
                 
-        print(predicts)
         print("len_predict", len(predicts))
         
         if (num_people == 2):
@@ -132,7 +131,7 @@ def walk_path_vote(meta, input_file_name, output_file_name):
             if most_common_value == (i % 3):
                 correct += 1
                     
-        vote_acc =  100. * correct / (624*graph_per_video)
+        vote_acc =  100. * correct / (NUM_CLASSES*NUM_PAIR*graph_per_video)
 
         np.save(f"results/{output_file_name}/{try_count}/conf_mat", confusion_matrix)
         np.save(f"results/{output_file_name}/{try_count}/vote_acc", vote_acc)
