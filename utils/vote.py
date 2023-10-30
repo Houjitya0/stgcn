@@ -31,7 +31,7 @@ def pair_vote(meta, input_file_name, output_file_name):
             model.eval()
             # 学習データの読み込み
             data_loader = dict()
-            data_loader['test'] = torch.utils.data.DataLoader(dataset=Pair_Test_Dataset(data_path=f'my_data/{input_file_name}/{try_count}/data.npy', label_path=f'my_data/{input_file_name}/{try_count}/label.npy', pair_num=one_pair), batch_size=BATCH_SIZE, shuffle=False)
+            data_loader['test'] = torch.utils.data.DataLoader(dataset=Pair_Test_Dataset(data_path=f'my_data/{input_file_name}/{try_count}/data.npy', label_path=f'my_data/{input_file_name}/{try_count}/label.npy', pair_num=one_pair, NUM_PAIR=NUM_PAIR), batch_size=BATCH_SIZE, shuffle=False)
             
             with torch.no_grad():
                 for batch_idx, (data, label) in enumerate(data_loader['test']):    
