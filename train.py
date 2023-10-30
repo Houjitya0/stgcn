@@ -61,18 +61,9 @@ for try_count in range(1, try_num + 1):
       meta["right_node_index"] = node_index[1]
       create_two_person_data(meta, try_count, input_file_name)
 
-
-
     # 学習結果のファイルを作成
     os.makedirs(name=f"pth_file/{output_file_name}", exist_ok=True)
     os.makedirs(f"results/{output_file_name}", exist_ok=True)
-
-    graph_type = meta["graph_type"]
-    in_channels = meta["in_channels"]
-    t_kernel_size = meta["t_kernel_size"]
-    node_num = meta["node_num"]
-    E = meta["E"]
-    has_bn = meta["has_bn"]
 
     # ******************************************* train ****************************************************************************************************
     if (meta["train_type"] == "pair"):

@@ -315,4 +315,3 @@ def create_short_video_and_adjust_framesize(video_keypoint, in_frame_num ,out_fr
         mim_mov_data[i] = video_keypoint[time_list]
 
     return mim_mov_data
-
