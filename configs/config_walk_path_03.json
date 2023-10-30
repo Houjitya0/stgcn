@@ -1,8 +1,8 @@
 {
-  "name" : "no_connect",
+  "name" : "has_bn_upperright_down",
 
   "train_type" : "walk_path",
-  "train_walk_num" : 0,
+  "train_walk_num" : 1,
   "test_walk_num" : 2,
 
   "try_num": 3,
@@ -35,5 +35,5 @@
   "normarize_scale" : 150,
   "in_channels" : 2,
   "t_kernel_size" : 9,
-  "has_bn" : false
+  "has_bn" : true
 }

@@ -1,5 +1,5 @@
 {
-  "name" : "center_scale",
+  "name" : "center_hand_to_hand",
 
   "try_num": 10,
   "BATCH_SIZE" : 32,
