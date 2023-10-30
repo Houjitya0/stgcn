@@ -24,6 +24,7 @@ def create_two_person_data(meta, try_count, input_file_name):
     if not (os.path.isdir(f"my_data/{input_file_name}/{try_count}")):
         keypoints = np.load("my_data/N_M_T_V_C_keiypoints.npy")
         labels = np.load("my_data/N_Time.npy")
+
         
         N, M, T, V, C = keypoints.shape
         if meta["is_turned"] == True:
@@ -35,10 +36,12 @@ def create_two_person_data(meta, try_count, input_file_name):
 
         for i in range(N):
             for j in range(M):
-                # 人物をフレームの中心に持ってくる
-                keypoints[i, j] = to_center(keypoints[i, j], shoulder_and_hip, 255, 255)
-                # 時間
-                keypoints[i, j] = t_skeleton_normarization_fixed_size(data=keypoints[i, j], fixed_size=50, is_center=meta["is_center"])
+                
+                if meta["has_bn"] == False:
+                    # 人物をフレームの中心に持ってくる
+                    keypoints[i, j] = to_center(keypoints[i, j], shoulder_and_hip, 255, 255)
+                    # 時間
+                    keypoints[i, j] = t_skeleton_normarization_fixed_size(data=keypoints[i, j], fixed_size=50, is_center=meta["is_center"])
 
             # 左の人からはleft_node_indexにはいっているノードだけ取り出す
             # 例 left_node_index=[0, 1, 2, 15] 鼻,左目,右目,左足首

@@ -1,9 +1,9 @@
 {
-  "name" : "turned_upperright_lowerleft",
+  "name" : "turned_up_down",
 
   "train_type" : "walk_path",
-  "train_walk_num" : 1,
-  "test_walk_num" : 3,
+  "train_walk_num" : 0,
+  "test_walk_num" : 2,
 
   "try_num": 10,
   "BATCH_SIZE" : 32,
@@ -35,7 +35,7 @@
   "normarize_scale" : 150,
   "in_channels" : 2,
   "t_kernel_size" : 9,
-  "has_bn" : false,
+  "has_bn" : true,
 
   "is_turned" : true
 }
