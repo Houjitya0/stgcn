@@ -36,8 +36,8 @@ def pair_train(meta, try_count, input_file_name, output_file_name):
     # **************************深層学習**********************************************************
     for one_pair in range(1, NUM_PAIR+1):
         data_loader = dict()
-        data_loader['train'] = torch.utils.data.DataLoader(dataset=Pair_Train_Dataset(data_path=f'my_data/{input_file_name}/{try_count}/data.npy', label_path=f'my_data/{input_file_name}/{try_count}/label.npy', pair_num=one_pair), batch_size=BATCH_SIZE, shuffle=True)
-        data_loader['test'] = torch.utils.data.DataLoader(dataset=Pair_Test_Dataset(data_path=f'my_data/{input_file_name}/{try_count}/data.npy', label_path=f'my_data/{input_file_name}/{try_count}/label.npy', pair_num=one_pair), batch_size=BATCH_SIZE, shuffle=False)
+        data_loader['train'] = torch.utils.data.DataLoader(dataset=Pair_Train_Dataset(data_path=f'my_data/{input_file_name}/{try_count}/data.npy', label_path=f'my_data/{input_file_name}/{try_count}/label.npy', pair_num=one_pair, NUM_PAIR=NUM_PAIR), batch_size=BATCH_SIZE, shuffle=True)
+        data_loader['test'] = torch.utils.data.DataLoader(dataset=Pair_Test_Dataset(data_path=f'my_data/{input_file_name}/{try_count}/data.npy', label_path=f'my_data/{input_file_name}/{try_count}/label.npy', pair_num=one_pair, NUM_PAIR=NUM_PAIR), batch_size=BATCH_SIZE, shuffle=False)
         
         print('one_pair', one_pair)
         train_loss_list = []
