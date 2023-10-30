@@ -17,7 +17,7 @@ def create_two_person_data(meta, try_count, input_file_name):
     min_move_num = meta["min_move_num"]
     out_frame_num = meta["out_frame_num"]
     
-    shoulder_and_hip = meta["should_and_hip"]
+    shoulder_and_hip = meta["shoulder_and_hip"]
     left_node_index = meta["left_node_index"]
     right_node_index = meta["right_node_index"]
     
