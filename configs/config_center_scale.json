@@ -7,7 +7,7 @@
   "NUM_EPOCH" : 20,
   "NUM_PAIR" : 52,
 
-  
+  "train_type" : "pair",
   "interval_num": 18, 
   "min_move_num": 50, 
   "out_frame_num": 16, 
