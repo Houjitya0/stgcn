@@ -1,6 +1,8 @@
 {
   "name" : "center_hand_to_hand",
 
+  "train_type" : "pair",
+
   "try_num": 10,
   "BATCH_SIZE" : 32,
   "NUM_CLASSES" : 3,
