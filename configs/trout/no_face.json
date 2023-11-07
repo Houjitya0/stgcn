@@ -34,5 +34,6 @@
   "normarize_scale" : 150,
   "in_channels" : 2,
   "t_kernel_size" : 9,
-  "has_bn" : false
+  "has_bn" : false,
+  "is_turned" : true
 }
