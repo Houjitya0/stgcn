@@ -1,8 +1,6 @@
 import numpy as np
 import random
-
-
-import numpy as np
+import cv2
 import math
 
 def translate_data(data, trans_cood):
@@ -315,3 +313,46 @@ def create_short_video_and_adjust_framesize(video_keypoint, in_frame_num ,out_fr
         mim_mov_data[i] = video_keypoint[time_list]
 
     return mim_mov_data
+
+
+# data : (V, C)
+def skeleton_perspectiveTransform(data, shoulder_and_hip, size=50):
+    
+    source_point = np.array([data[6], data[12], data[11], data[5]], dtype=np.float32)
+    # source_point = np.array([[20, 0], [0, 50], [50, 50], [50, 0]], dtype=np.float32)
+    
+    target_point = np.array([[0, 0], [0, size], [30, size], [30, 0]], dtype=np.float32)
+    # target_point = np.array([[50, 50], [50, 200], [200, 200], [200, 50]], dtype=np.float32)
+    # target_point = np.array([[0, 0], [0, 50], [50, 50], [50, 0]], dtype=np.float32)
+    
+
+    mat = cv2.getPerspectiveTransform(source_point, target_point)
+    # print(mat)
+    V, C = data.shape
+    
+    for i, d in enumerate(data):
+        s = np.concatenate([d, np.array([1])])
+
+        data[i] = warpPerspective(d, mat)
+    
+    
+    return data
+
+# input_data : (T, V, C)
+def t_skeleton_perspectiveTransform(data, shoulder_and_hip, size=50):
+    
+    T, V, C = data.shape
+
+    for i, d in enumerate(data):
+        data[i] = skeleton_perspectiveTransform(d, shoulder_and_hip)
+    
+    
+    return data
+
+# input d : xy座標, M : 変換行列
+def warpPerspective(d, M):
+    x = d[0]
+    y = d[1]
+    _x = (M[0, 0]*x + M[0, 1]*y + M[0, 2]) / (M[2, 0]*x + M[2, 1]*y + M[2, 2])
+    _y = (M[1, 0]*x + M[1, 1]*y + M[1, 2]) / (M[2, 0]*x + M[2, 1]*y + M[2, 2])
+    return np.array([_x, _y])

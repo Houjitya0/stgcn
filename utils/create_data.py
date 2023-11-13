@@ -2,7 +2,7 @@ import numpy as np
 import os
 import time
 import datetime
-from utils.pre_data import to_center, t_skeleton_normarization_fixed_size, setup_data
+from utils.pre_data import to_center, t_skeleton_normarization_fixed_size, setup_data, t_skeleton_perspectiveTransform
 
 def create_two_person_data(meta, try_count, input_file_name):
     
@@ -40,8 +40,12 @@ def create_two_person_data(meta, try_count, input_file_name):
                 if meta["has_bn"] == False:
                     # 人物をフレームの中心に持ってくる
                     keypoints[i, j] = to_center(keypoints[i, j], shoulder_and_hip, 255, 255)
-                    # 時間
+                    # 時間(T, V, C)を入力にして正規化
                     keypoints[i, j] = t_skeleton_normarization_fixed_size(data=keypoints[i, j], fixed_size=50, is_center=meta["is_center"])
+                    
+                if meta["has_perspective"] == True:
+                    keypoints[i, j] = t_skeleton_perspectiveTransform(data=keypoints[i, j],  shoulder_and_hip=shoulder_and_hip)
+                    
 
             # 左の人からはleft_node_indexにはいっているノードだけ取り出す
             # 例 left_node_index=[0, 1, 2, 15] 鼻,左目,右目,左足首

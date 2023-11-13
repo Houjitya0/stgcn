@@ -30,10 +30,6 @@ node_index = meta["node_index"]
 
 # 学習パラメータ
 try_num = meta["try_num"]
-BATCH_SIZE = meta["BATCH_SIZE"]
-NUM_CLASSES = meta["NUM_CLASSES"]
-NUM_EPOCH = meta["NUM_EPOCH"]
-NUM_PAIR = meta["NUM_PAIR"]
 
 # 短動画パラメータ
 interval_num = meta["interval_num"]
@@ -54,7 +50,6 @@ for try_count in range(1, try_num + 1):
     os.makedirs(name=f"my_data/{input_file_name}", exist_ok=True)
 
     # ***********************************データ作成****************************************************************
-
 
     if num_people == 2:
       meta["left_node_index"] = node_index[0]
