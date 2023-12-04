@@ -1,0 +1,44 @@
+{
+  "name" : "phalp_upper_right_lower_left",
+
+  "train_type" : "walk_path",
+  "train_walk_num" : 1,
+  "test_walk_num" : 3,
+
+  "pose_data_type" : "phalp",
+
+
+  "try_num": 10,
+  "BATCH_SIZE" : 32,
+  "NUM_CLASSES" : 3,
+  "NUM_EPOCH" : 20,
+  "NUM_PAIR" : 52,
+
+  
+  "interval_num": 18, 
+  "min_move_num": 50, 
+  "out_frame_num": 16, 
+  
+  
+  "num_people" : 2,
+  "node_num" : 34,
+  
+  "node_option_name" : "phalp_45",
+  "node_index" : [[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16], 
+                  [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]],
+
+  
+  "E" : [[0, 1], [0, 15], [0, 16], [1, 2], [2, 3], [3, 4], [2, 9], [1, 5], [5, 6], [6, 7], [5, 12], [9, 10], [10, 11], [9, 12], [12, 13], [13, 14]],
+
+  "shoulder_and_hip" : null,
+
+  "graph_type" : "base",
+  "is_center" : null,
+  "normarize_scale" : null,
+  "in_channels" : 3,
+  "t_kernel_size" : 9,
+  "has_bn" : null,
+  "is_turned" : null,
+  "has_perspective" : null,
+  "3d_normarize" : true
+}
