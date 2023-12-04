@@ -51,6 +51,7 @@ class Pair_Walk_Path_Train_Dataset(torch.utils.data.Dataset):
   def __init__(self, data_path, label_path, NUM_PAIR, NUM_CLASSES, walk_path_num):
       super().__init__()
       tmp = np.load(data_path).astype(np.float32)
+      print(data_path, tmp[0, 0])
       N, T, V, C = tmp.shape
       slash = N // 4
       self.data = tmp[(walk_path_num)*(slash): (walk_path_num+1)*(slash)]
