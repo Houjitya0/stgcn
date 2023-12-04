@@ -1,4 +1,3 @@
-python train.py bn_up_down
-python train.py bn_up_lowerleft
-python train.py bn_upperright_down
-python train.py bn_upperright_lowerleft
+python train.py 3d_base2
+python train.py 3d_base3
+python train.py 3d_base4

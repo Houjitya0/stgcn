@@ -1,4 +1,3 @@
-python train.py up_down
-python train.py up_lowerleft
-python train.py upperright_down
-python train.py upperright_lowerleft
+python train.py phalp_base_up_lower_left
+python train.py phalp_base_upper_right_down
+python train.py phalp_base_upper_right_lower_left

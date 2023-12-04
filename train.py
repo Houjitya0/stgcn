@@ -41,8 +41,8 @@ print("out_frame_num", out_frame_num)
 
 
 # *****************変数定義*********************************************************************
-input_file_name = f"{num_people}p_{node_option_name}_interval_{interval_num}_min_mov_num_{min_move_num}_out_frame_num_{out_frame_num}"
-output_file_name = f"{num_people}p_{name}_{node_option_name}_interval_{interval_num}_min_mov_num_{min_move_num}_out_frame_num_{out_frame_num}"
+input_file_name = f"{node_option_name}"
+output_file_name = f"{name}_{node_option_name}"
 
 
 # ******************試行開始**********************************************************************
