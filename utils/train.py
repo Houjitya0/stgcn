@@ -210,7 +210,7 @@ def walk_path_train(meta, try_count, input_file_name, output_file_name):
         avg_val_acc = val_acc / len(data_loader['test'].dataset)
         
         print ('Epoch [{}/{}], train_loss: {train_loss:.4f}, train_acc : {train_acc} ,val_loss: {val_loss:.4f}, val_acc: {val_acc:.4f}' 
-                    .format(epoch+1, NUM_EPOCH, i+1, train_loss=avg_train_loss, train_acc=train_acc, val_loss=avg_val_loss, val_acc=avg_val_acc))
+                    .format(epoch+1, NUM_EPOCH, i+1, train_loss=avg_train_loss, train_acc=avg_train_acc, val_loss=avg_val_loss, val_acc=avg_val_acc))
         train_loss_list.append(avg_train_loss)
         train_acc_list.append(avg_train_acc)
         val_loss_list.append(avg_val_loss)
