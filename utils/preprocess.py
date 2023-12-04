@@ -98,6 +98,7 @@ def transform_normarize(data, meta):
                 input[n, m, t] = kp
                 
     data[624//4*train_walk_num : 624//4*(train_walk_num+1)] = input
+    return data
 
 
 if __name__ == '__main__':
