@@ -37,7 +37,7 @@
   "normarize_scale" : null,
   "in_channels" : 3,
   "t_kernel_size" : 9,
-  "has_bn" : null,
+  "has_bn" : true,
   "is_turned" : null,
   "has_perspective" : null,
   "pyskl_3d_normarize" : false,
