@@ -2,3 +2,7 @@ pth_file/
 my_data/
 results/
 imgs/
+configs/karajan
+configs/judge
+configs/trout
+configs/venti
