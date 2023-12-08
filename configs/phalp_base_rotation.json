@@ -11,7 +11,7 @@
   "try_num": 10,
   "BATCH_SIZE" : 32,
   "NUM_CLASSES" : 3,
-  "NUM_EPOCH" : 20,
+  "NUM_EPOCH" : 1,
   "NUM_PAIR" : 52,
 
   
