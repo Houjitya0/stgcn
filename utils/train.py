@@ -167,7 +167,9 @@ def walk_path_train(meta, try_count, input_file_name, output_file_name):
         
     model = ST_GCN(graph_type=graph_type, NUM_CLASSES=NUM_CLASSES, in_channels=in_channels, t_kernel_size=t_kernel_size, node_num=node_num, E=E, has_bn=has_bn).cuda()
     
-    optimizer = torch.optim.SGD(model.parameters(), lr=0.01, momentum=0.9)
+    # optimizer = torch.optim.SGD(model.parameters(), lr=0.01, momentum=0.9)
+    optimizer = torch.optim.SGD(model.parameters(), lr=meta["lr"], momentum=meta["momentum"], weight_decay=meta["weight_decay"], nesterov=meta["nesterov"])
+    
     criterion = torch.nn.CrossEntropyLoss()
 
     # 学習

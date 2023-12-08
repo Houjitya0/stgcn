@@ -41,5 +41,11 @@
   "is_turned" : null,
   "has_perspective" : null,
   "pyskl_3d_normarize" : false,
-  "transform_normarize" : false
+  "transform_normarize" : false,
+
+  "lr" : 0.01,
+  "momentum" : 0.09,
+  "nesterov" :true,
+  "weight_decay" : 0.0005
+
 }

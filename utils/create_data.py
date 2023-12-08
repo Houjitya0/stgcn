@@ -104,7 +104,7 @@ def create_two_person_data(meta, try_count, input_file_name):
             if (meta["transform_normarize"] == True):
                 keypoints = transform_normarize(keypoints, meta)
             
-            tmp = keypoints.reshape(N, T, V*M, C)
+            tmp = keypoints.reshape(N, T, V*M, C)   
             for i in range(N):                
                 
                 # 左の人からはleft_node_indexにはいっているノードだけ取り出す
