@@ -85,6 +85,8 @@ def create_two_person_data(meta, try_count, input_file_name):
             
             if (meta["pose_data_type"] == "phalp"):
                 keypoints = np.load("my_data/phalp_n_m_t_v_c.npy")
+            elif (meta["pose_data_type"] == "phalp_rotation"):
+                keypoints = np.load("my_data/phalp_rotation_n_m_t_v_c.npy")
             else:
                 keypoints = np.load("my_data/3d_keiypoints.npy")
                 

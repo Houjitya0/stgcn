@@ -112,7 +112,7 @@ def walk_path_vote(meta, input_file_name, output_file_name):
                 predict = predict.to('cpu').detach().numpy().copy()
                 predicts += predict.tolist() 
                 
-        print("len_predict", predicts)
+        # print("len_predict", predicts)
         
         if (num_people == 2):
             graph_per_video = 1
