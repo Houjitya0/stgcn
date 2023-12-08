@@ -1,5 +1,5 @@
 {
-  "name" : "phalp_up_down",
+  "name" : "phalp_rotate",
 
   "train_type" : "walk_path",
   "train_walk_num" : 0,
@@ -21,14 +21,14 @@
   
   
   "num_people" : 2,
-  "node_num" : 34,
+  "node_num" : 26,
   
   "node_option_name" : "rotation",
-  "node_index" : [[0, 2, 3, 4, 5, 6, 7, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18], 
-                  [0, 2, 3, 4, 5, 6, 7, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]],
+  "node_index" : [[0, 1, 3, 4, 6, 7, 14, 15, 16, 17, 18, 19, 20], 
+                  [0, 1, 3, 4, 6, 7, 14, 15, 16, 17, 18, 19, 20]],
 
   
-  "E" : [[0, 2], [0, 5], [0, 15], [0, 16], [2, 3], [3, 4], [2, 9], [5, 6], [6, 7], [5, 12], [9, 10], [10, 11], [9, 12], [12, 13], [13, 14], [15, 17], [16, 18]],
+  "E" : [[0, 1], [0, 3], [1, 4], [3, 6],[4, 7], [0, 15], [1, 16], [15, 14], [16, 14], [15, 17], [16, 18], [17, 19], [18, 20]],
 
   "shoulder_and_hip" : null,
 
@@ -41,5 +41,5 @@
   "is_turned" : null,
   "has_perspective" : null,
   "pyskl_3d_normarize" : false,
-  "transform_normarize" : true
+  "transform_normarize" : false
 }

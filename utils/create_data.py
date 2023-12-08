@@ -81,7 +81,7 @@ def create_two_person_data(meta, try_count, input_file_name):
 
 
 ##################################### 3d ##############################################################################################
-        elif (meta["in_channels"] == 3):
+        elif (meta["in_channels"] in [3, 9]):
             
             if (meta["pose_data_type"] == "phalp"):
                 keypoints = np.load("my_data/phalp_n_m_t_v_c.npy")
