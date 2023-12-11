@@ -95,6 +95,7 @@ def walk_path_vote(meta, input_file_name, output_file_name):
         # 動画ごとに投票を行う
         correct = 0
         confusion_matrix = np.zeros((3, 3))
+        predicts = []
         
         # 学習済みモデルの読み込みを行い、評価モードに
         model = torch.load(f'pth_file/{output_file_name}/{try_count}/model_weight')
@@ -119,7 +120,7 @@ def walk_path_vote(meta, input_file_name, output_file_name):
         elif (num_people ==1):
             graph_per_video = 2
             
-
+        # np.save(f"{try_count}.pkl", predicts)
         for i in range(NUM_CLASSES*NUM_PAIR): 
             # 投票
             a = predicts[(i)*(graph_per_video*min_move_num):(i+1)*(graph_per_video*min_move_num)]

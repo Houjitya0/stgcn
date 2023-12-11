@@ -1,5 +1,5 @@
 {
-  "name" : "phalp_rotate",
+  "name" : "up_down",
 
   "train_type" : "walk_path",
   "train_walk_num" : 0,
@@ -11,7 +11,7 @@
   "try_num": 10,
   "BATCH_SIZE" : 32,
   "NUM_CLASSES" : 3,
-  "NUM_EPOCH" : 1,
+  "NUM_EPOCH" : 10,
   "NUM_PAIR" : 52,
 
   
@@ -33,18 +33,18 @@
   "shoulder_and_hip" : null,
 
   "graph_type" : "base",
-  "is_center" : null,
-  "normarize_scale" : null,
+  "is_center" : false,
+  "normarize_scale" : false,
   "in_channels" : 9,
   "t_kernel_size" : 9,
-  "has_bn" : null,
-  "is_turned" : null,
-  "has_perspective" : null,
+  "has_bn" : false,
+  "is_turned" : false,
+  "has_perspective" : false,
   "pyskl_3d_normarize" : false,
   "transform_normarize" : false,
 
   "lr" : 0.01,
-  "momentum" : 0.09,
+  "momentum" : 0.9,
   "nesterov" :true,
   "weight_decay" : 0.0005
 
