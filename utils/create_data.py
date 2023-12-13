@@ -3,7 +3,7 @@ import os
 import time
 import datetime
 from utils.pre_data import to_center, t_skeleton_normarization_fixed_size, setup_data, t_skeleton_perspectiveTransform, PreNormalize3D
-from utils.preprocess import pre_normalization, transform_normarize
+from utils.preprocess import pre_normalization, transform_normarize, point_transform
 
 def create_two_person_data(meta, try_count, input_file_name):
     
@@ -87,6 +87,10 @@ def create_two_person_data(meta, try_count, input_file_name):
                 keypoints = np.load("my_data/phalp_n_m_t_v_c.npy")
             elif (meta["pose_data_type"] == "phalp_rotation"):
                 keypoints = np.load("my_data/phalp_rotation_n_m_t_v_c.npy")
+            elif (meta["pospe_data_type"] == "4D_Humans_n_m_t_v_c"):
+                keypoints = np.load("my_data/4D_Humans_n_m_t_v_c.npy")
+            elif (meta["pospe_data_type"] == "4D_Humans_rotation"):
+                keypoints = np.load("my_data/4D_Humans_rotation_n_m_t_v_c.npy")
             else:
                 keypoints = np.load("my_data/3d_keiypoints.npy")
                 
@@ -101,8 +105,13 @@ def create_two_person_data(meta, try_count, input_file_name):
             if (meta["pyskl_3d_normarize"] == True):
                 keypoints = pre_normalization(keypoints)
                 
+            # 変換行列を用いた正規化
             if (meta["transform_normarize"] == True):
-                keypoints = transform_normarize(keypoints, meta)
+                
+                if (meta["transformer_matrix_folder"] in ["3point_matrix", "4point_matrix", "17point_matrix"]) :
+                    keypoints = point_transform(keypoints, meta)
+                elif (meta["transformer_matrix_folder"] == "all_node_to_node"):
+                    keypoints = transform_normarize(keypoints, meta)
             
             tmp = keypoints.reshape(N, T, V*M, C)   
             for i in range(N):                

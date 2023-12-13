@@ -81,24 +81,49 @@ def pre_normalization(data, zaxis=[1, 8], xaxis=[9, 12]):
 
 # input : (n, m, t, v, c)
 def transform_normarize(data, meta):
+    print("start all_node_to_node_transforme_normarization")
     train_walk_num = meta["train_walk_num"]
     test_walk_num = meta["test_walk_num"]
     input = data[624//4*train_walk_num : 624//4*(train_walk_num+1)]
     filename = ["up", "upper_right", "down", "lower_left"]
-
+    transformer_matrix_folder = meta["transformer_matrix_folder"]
     for n, N in enumerate(tqdm(input)):
         for m, M in enumerate(N): 
             for t, T in enumerate(M):
                 kp = np.zeros([45, 3])
 
                 for i, x in enumerate(T):
-                    A_s = np.load(f"utils/transformer_matrix/{filename[train_walk_num]}_to_{filename[test_walk_num]}.npy")
+                    A_s = np.load(f"utils/{transformer_matrix_folder}/{filename[train_walk_num]}_to_{filename[test_walk_num]}.npy")
                     tmp = (A_s[i] @ np.array([x]).T)
                     kp[i] = tmp.T
                 input[n, m, t] = kp
                 
     data[624//4*train_walk_num : 624//4*(train_walk_num+1)] = input
     return data
+
+def point_transform(data, meta):
+    train_walk_num = meta["train_walk_num"]
+    test_walk_num = meta["test_walk_num"]
+    input = data[624//4*train_walk_num : 624//4*(train_walk_num+1)]
+    filename = ["up", "upper_right", "down", "lower_left"]
+    transformer_matrix_folder = meta["transformer_matrix_folder"]
+    
+    A_s = np.load(f"utils/{transformer_matrix_folder}/{filename[train_walk_num]}_to_{filename[test_walk_num]}.npy")
+    print("start points transforme normarization")
+    for n, N in enumerate(tqdm(input)):
+        for m, M in enumerate(N): 
+            for t, T in enumerate(M):
+                kp = np.zeros([45, 3])
+                for i, x in enumerate(T):
+                    
+                    kp = input[n, m, t] @ A_s
+
+                input[n, m, t] = kp
+                
+    data[624//4*train_walk_num : 624//4*(train_walk_num+1)] = input
+    return data
+
+    
 
 
 if __name__ == '__main__':
