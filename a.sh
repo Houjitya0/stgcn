@@ -1,4 +1,4 @@
-python train.py 4point_up_down
-python train.py 4point_up_lowerleft
-python train.py 4point_upperight_down
-python train.py 4point_upperight_lowerleft
+python train.py altair/0-2_pyskl_rot
+python train.py altair/0-3_pyskl_rot
+python train.py altair/1-2_pyskl_rot
+python train.py altair/1-3_pyskl_rot
