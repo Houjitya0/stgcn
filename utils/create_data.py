@@ -81,18 +81,20 @@ def create_two_person_data(meta, try_count, input_file_name):
 
 
 ##################################### 3d ##############################################################################################
-        elif (meta["in_channels"] in [3, 9]):
+        elif (meta["in_channels"] in [3, 9, 12]):
             
             if (meta["pose_data_type"] == "phalp"):
                 keypoints = np.load("my_data/phalp_n_m_t_v_c.npy")
             elif (meta["pose_data_type"] == "phalp_rotation"):
                 keypoints = np.load("my_data/phalp_rotation_n_m_t_v_c.npy")
-            elif (meta["pospe_data_type"] == "4D_Humans_n_m_t_v_c"):
+            elif (meta["pose_data_type"] == "4D_Humans_n_m_t_v_c"):
                 keypoints = np.load("my_data/4D_Humans_n_m_t_v_c.npy")
-            elif (meta["pospe_data_type"] == "4D_Humans_rotation"):
+            elif (meta["pose_data_type"] == "4D_Humans_rotation"):
                 keypoints = np.load("my_data/4D_Humans_rotation_n_m_t_v_c.npy")
-            else:
-                keypoints = np.load("my_data/3d_keiypoints.npy")
+            elif (meta["pose_data_type"] is not None):
+                print(meta["pose_data_type"])
+                keypoints = np.load(f"my_data/{meta['pose_data_type']}.npy")
+                
                 
             labels = np.load("my_data/N_Time.npy")       
             
@@ -101,17 +103,21 @@ def create_two_person_data(meta, try_count, input_file_name):
             data = np.zeros((N * min_move_num, out_frame_num, VxM, C))
             
             
-            # pysklの軸を合わせる正規化
-            if (meta["pyskl_3d_normarize"] == True):
-                keypoints = pre_normalization(keypoints)
+
                 
             # 変換行列を用いた正規化
             if (meta["transform_normarize"] == True):
                 
                 if (meta["transformer_matrix_folder"] in ["3point_matrix", "4point_matrix", "17point_matrix"]) :
                     keypoints = point_transform(keypoints, meta)
-                elif (meta["transformer_matrix_folder"] == "all_node_to_node"):
+                elif (meta["transformer_matrix_folder"] in ["all_points_matrix", "transformer_matrix"]):
                     keypoints = transform_normarize(keypoints, meta)
+                    
+            # pysklの軸を合わせる正規化
+            print("before", keypoints.shape)
+            if (meta["pyskl_3d_normarize"] == True):
+                keypoints = pre_normalization(keypoints)
+                print(keypoints.shape)
             
             tmp = keypoints.reshape(N, T, V*M, C)   
             for i in range(N):                

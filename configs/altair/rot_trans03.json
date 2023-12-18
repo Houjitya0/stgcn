@@ -1,9 +1,9 @@
 {
-  "name" : "up_down",
+  "name" : "upperright_lowerleft",
 
   "train_type" : "walk_path",
   "train_walk_num" : 0,
-  "test_walk_num" : 2,
+  "test_walk_num" : 3,
 
   "pose_data_type" : "phalp",
 
@@ -23,7 +23,7 @@
   "num_people" : 2,
   "node_num" : 34,
   
-  "node_option_name" : "bn",
+  "node_option_name" : "pyskl_rot_trans13",
   "node_index" : [[0, 2, 3, 4, 5, 6, 7, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18], 
                   [0, 2, 3, 4, 5, 6, 7, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]],
 
@@ -37,11 +37,11 @@
   "is_center" : false,
   "normarize_scale" : false,
 
-  "has_bn" : true,
+  "has_bn" : false,
   "is_turned" : false,
   "has_perspective" : false,
-  "pyskl_3d_normarize" : false,
-  "transform_normarize" : false,
+  "transform_normarize" : true,
+  "pyskl_3d_normarize" : true,
   "transformer_matrix_folder" : null,
 
   "lr" : 0.01,
