@@ -7,7 +7,7 @@ def draw_adjancy_matrix(A, save_folder, file_name):
     sns.heatmap(A, annot=False, cmap='Blues', fmt=".0f", cbar=False)
     # sns.heatmap(A, annot=True, cmap='Blues',  fmt=".0f", cbar=False, annot_kws={"fontsize":18})
     plt.title(f'adjancy matrix')
-    plt.savefig(f'{save_folder}/{file_name}.png')
+    # plt.savefig(f'{save_folder}/{file_name}.png')
 
 
 # input (v, c)

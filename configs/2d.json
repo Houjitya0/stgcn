@@ -1,0 +1,49 @@
+{
+    "name" : "", 
+    "train_type" : "walk_path",
+  
+    "pose_data_type" : "",
+  
+  
+    "try_num": 3,
+    "BATCH_SIZE" : 32,
+    "NUM_CLASSES" : 3,
+    "NUM_EPOCH" : 20,
+    "NUM_PAIR" : 52,
+  
+    
+    "interval_num": 18, 
+    "min_move_num": 50, 
+    "out_frame_num": 16, 
+  
+    "num_people" : 2,
+    "node_num" : 34,
+    
+    "node_option_name" : "all",
+    "node_index" : [[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16], 
+                    [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]],
+    
+    "E" : [[0, 1],  [0, 2],   [1, 3],   [2, 4],   [0, 5],   [0, 6],   [5, 7],   [6, 8],    [7, 9],  [8, 10],  [5,11],    [6, 12],  [11, 13], [12, 14], [13, 15], [14, 16],
+          [17, 18], [17, 19], [18, 20], [19, 21], [17, 22], [17, 23], [22, 24], [23, 25],  [24, 9], [25, 27], [22, 28],  [23, 29], [28, 30], [29, 31], [30, 32], [31, 33]],
+          
+    "shoulder_and_hip" : null,
+  
+    "graph_type" : "base",
+    "is_center" : false,
+    "normarize_scale" : false,
+    "in_channels" : 2,
+
+    "t_kernel_size" : 9,
+    "has_bn" : true,
+    "is_turned" : false,
+    "has_perspective" : false,
+    "pyskl_3d_normarize" : false,
+    "transform_normarize" : false,
+    "min-max-scaling" : false,
+    "zscore" : false,
+
+    "lr" : 0.01,
+    "momentum" : 0.9,
+    "nesterov" :true,
+    "weight_decay" : 0.0005
+  }

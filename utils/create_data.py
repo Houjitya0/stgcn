@@ -2,6 +2,7 @@ import numpy as np
 import os
 import time
 import datetime
+import scipy
 from utils.pre_data import to_center, t_skeleton_normarization_fixed_size, setup_data, t_skeleton_perspectiveTransform, PreNormalize3D
 from utils.preprocess import pre_normalization, transform_normarize, point_transform
 
@@ -64,7 +65,7 @@ def create_two_person_data(meta, try_count, input_file_name):
 
                 data[i * min_move_num : (i + 1) * min_move_num] = setup_data(tmp, labels[i], out_frame_num, interval_num, min_move_num)
 
-            data = data / meta["normarize_scale"]
+            # data = data / meta["normarize_scale"]
             print(data.shape)
 
             # 正解ラベル作成
@@ -139,6 +140,21 @@ def create_two_person_data(meta, try_count, input_file_name):
 
             # データを保存
             os.makedirs(name=f"my_data/{input_file_name}/{try_count}", exist_ok=True)
+            
+            if (meta["min-max-scaling"] == True):
+                
+                data = data.transpose(3, 1, 2, 0)
+                for i in range(len(data)):
+                    data[i] = (data[i] - data[i].min()) / (data[i].max() - data[i].min())
+            
+                data = data.transpose(3, 1, 2, 0) 
+                
+            if (meta["zscore"] == True):
+                data = data.transpose(3, 1, 2, 0)
+                for i in range(len(data)):
+                    data[i] = scipy.stats.zscore(data[i])
+            
+                data = data.transpose(3, 1, 2, 0) 
 
             np.save(f"my_data/{input_file_name}/{try_count}/data.npy", data)
             np.save(f"my_data/{input_file_name}/{try_count}/label.npy", label)        
